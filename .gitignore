@@ -1,0 +1,26 @@
+# Build folders
+bin/
+obj/
+TestResults/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VSCode settings
+.vscode/
+.vs/
+
+# Ignore DLLs
+*.dll
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+
+# Others
+*.log
+*.tmp
