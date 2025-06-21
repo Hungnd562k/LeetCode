@@ -52,5 +52,23 @@ namespace LeetTest
                 new SequenceEqualComparer<IEnumerable<int>>()
             );
         }
+
+        [Fact]
+        public void Case3()
+        {
+            int[] nums = new[] { 1000000000, 1000000000, 1000000000, 1000000000 };
+            int target = -294967296;
+
+            var expected = new List<IList<int>>();
+
+            var actual = _solution.FourSum(nums, target);
+
+            // So sánh không cần đúng thứ tự bộ ba, nhưng cần nội dung giống nhau
+            Assert.Equal(
+                expected.Select(triplet => triplet.OrderBy(x => x)).OrderBy(t => string.Join(",", t)),
+                actual.Select(triplet => triplet.OrderBy(x => x)).OrderBy(t => string.Join(",", t)),
+                new SequenceEqualComparer<IEnumerable<int>>()
+            );
+        }
     }
 }

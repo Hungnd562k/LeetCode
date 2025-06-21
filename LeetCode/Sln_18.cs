@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LeetCode
+﻿namespace LeetCode
 {
     public partial class Solution
     {
@@ -17,29 +11,27 @@ namespace LeetCode
         public IList<IList<int>> FourSum(int[] nums, int target)
         {
             Array.Sort(nums);
-            int sum = 0;
+            long sum = 0;
             List<IList<int>> res = new List<IList<int>>();
             for (int i = 0; i < nums.Length - 3; i++)
             {
-                for (int j = 0; j < nums.Length - 4; j++)
+                if (i > 0 && nums[i] == nums[i - 1]) continue;
+                for (int j = i + 1; j < nums.Length - 2; j++)
                 {
-                    if (nums[i] == nums[j])
-                    {
-                        continue;
-                    }
+                    if (j > i + 1 && nums[j] == nums[j - 1]) continue;
                     int left = j + 1, right = nums.Length - 1;
                     while (left < right)
                     {
-                        sum = nums[i] + nums[j] + nums[left] + nums[right];
+                        sum = (long)nums[i] + nums[j] + nums[left] + nums[right]; // Phải ép nums[i] thành kiểu long để tránh tràn số, chỉ cần 1 phần tử đầu trong biểu thức là đủ vì nó sẽ ép cả tổng luôn
                         if (sum == target)
                         {
-                            res.Add(new List<int>() { nums[i], nums[j], nums[left], nums[right] });
-                            while (left < right && nums[right - 1] == nums[right]) right--;
-                            while (left < right && nums[left + 1] == nums[left]) left++;
-                            right--; left++;
+                            res.Add(new List<int> { nums[i], nums[j], nums[left], nums[right] });
+                            while (left < right && nums[left] == nums[left + 1]) left++;
+                            while (left < right && nums[right] == nums[right - 1]) right--;
+                            left++; right--;
                         }
                         else if (sum < target) left++;
-                        else right--;                        
+                        else right--;
                     }
                 }
             }
